@@ -1,0 +1,125 @@
+Tela de autenticação:
+
+        A tela inicial da aplicação deve possibilitar que o usuário adicione manualmente
+        as keys de autenticação para uso da API (public key e private key);
+        As keys de autenticação inseridas pelo usuário devem ser persistidas nos
+        cookies do navegador e caso o usuário deseje alterá-las deve haver uma tela
+        para isso;
+
+
+        Tendo em conta a instrução anterior sobre a importância de armazenar as
+        chaves de autenticação do usuário nos cookies, é crucial assegurar que, ao
+        pressionar a tecla F5 para atualizar a página, o usuário não seja desconectado
+        de sua autenticação;
+
+
+Telas de listagem:
+
+Deve haver 3 telas de listagem de itens, sendo, personagens, quadrinhos e
+criadores;
+
+Todas as telas de listagem devem ter infinity scroll ou paginação;
+
+
+Funcionalidades satisfatórias (Dr Estranho)
+Tela do item:
+Deve ser possível clicar nos itens listados (personagens, quadrinhos e
+criadores) e abrir uma tela contendo seus detalhes;
+
+Busca por nome:
+Todas as 3 telas (personagens, quadrinhos e criadores), devem ter busca por
+nome;
+
+Dark mode:
+Permitir a mudança temporária do esquema cromático, de forma que ao ser
+ativado, a aparência da interface gráfica seja exibida com tonalidades mais
+escuras;
+
+A aplicação deve seguir como padrão a preferência previamente escolhida no
+sistema operacional do usuário;
+
+A aplicação deve armazenar a última opção selecionada pelo usuário em
+cookies, ou seja, após escolher uma opção e atualizar a página (F5), a seleção
+feita deve ser mantida
+
+
+
+Funcionalidades desejáveis (Thor)
+Filtros por opções:
+
+Possibilitar filtros mais detalhados nas listagens, como:
+Filtro por criador;
+
+Filtro por personagens;
+
+Deve ser possível pesquisar a opção de filtragem (criador, personagens) pelo
+nome dentro do filtro;
+
+Filtros por data de lançamento:
+
+Possibilitar filtros por data nas listagens:
+
+Filtro por data fixa de lançamento;
+
+Filtro por intervalo de data de lançamento;
+
+Filtro por data relativa de lançamento;
+
+Hoje;
+Últimos N Dias;
+Últimos N Meses;
+Últimos N Anos;
+
+
+
+Funcionalidades excepcionais (Celestial)
+
+Criação de filtros personalizados:
+
+Capacidade de criar filtros mais sofisticados, permitindo a combinação de todos
+os filtros disponíveis (por opção e por data), utilizando operadores lógicos como
+AND e OR;
+
+Adicionalmente, incluir a funcionalidade de armazenar os filtros em cookies,
+tornando-os acessíveis para futura utilização e edição. Os usuários também
+devem poder dar nomes a esses filtros, simplificando a identificação e seleção
+dos mesmos;
+
+Links entre as entidades:
+
+Ao final de todas as entidades exibir os itens relacionados, como personagens,
+quadrinhos, criadores, etc;
+
+Também deve ser possível clicar no item relacionado e abrir a tela de descrição
+desse item;
+
+Tela de itens favoritos:
+
+Possibilidade de favoritar itens e salvá-los nos cookies, tendo uma tela onde
+seja possível ao usuário visualizar todos os seus itens favoritados;
+
+Criar categorias que possibilitem ao usuário organizar seus itens favoritos em
+“caxininha” com nome;
+
+
+Funcionalidade “Eta porra” (One Above All)
+
+Linha do tempo:
+
+Criar uma linha do tempo interativa que se ajuste ao zoom do usuário.
+Inicialmente, exibir os eventos em ordem cronológica com marcadores de data.
+À medida que o usuário amplia o zoom, os eventos se expandem, revelando
+histórias, sequências de quadrinhos e personagens envolvidos;
+
+Todos os elementos devem ser clicáveis, permitindo ao usuário visualizar os
+detalhes do item sem sair da tela da linha do tempo;
+Incluir a capacidade de aplicar filtros na linha do tempo, com opções para
+intervalo de datas, criadores e personagens;
+
+Observação:
+Reconhecemos que essa é uma tarefa bastante desafiadora e não temos a
+expectativa de que você a conclua simultaneamente às outras atividades
+deste desafio. No entanto, caso você seja capaz de realizá-la no tempo
+disponível, isso certamente será impressionante!
+
+
