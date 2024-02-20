@@ -9,6 +9,9 @@ import SetAPI from './Components/SetAPI.tsx';
 import GlobalStyle from './styles/global.ts';
 import Home from './Pages/Home.tsx';
 import Logout from './Pages/Logout.tsx';
+import Characters from './Pages/Characters.tsx';
+import Comics from './Pages/Comics.tsx';
+import Creators from './Pages/Creators.tsx';
 
 
 const router = createBrowserRouter([
@@ -23,7 +26,20 @@ const router = createBrowserRouter([
 {
   path: "/Logout",
   element: <Logout />
+},
+{
+  path: "/Characters",
+  element: <Characters />
+},
+{
+  path: "/Comics",
+  element: <Comics />
+},
+{
+  path: "/Creators",
+  element: <Creators />
 }
+
 
 ]);
 

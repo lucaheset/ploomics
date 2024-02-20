@@ -7,16 +7,19 @@ import md5 from "md5";
 import { Toaster, toast } from "sonner";
 import { Rotate } from "../styles/IsLoadingStyle";
 import GlobalStyle from "../styles/global";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Storage/useAuth";
+import { BASE_URL_CHARACTERS, CookiesName } from "../Constants";
+import { useLoading } from "../Storage/useLoading";
+import Loading from "./Loading";
 
 const SetAPI = () => {
   const [privateApi, setPrivateApi] = useState("");
   const [publicApi, setPublicApi] = useState("");
+  const setIsAuthenticated = useAuth((state) => state.setIsAuthenticated);
+  const isAuthenticated = useAuth((state) => state.isAuthenticated);
 
   const navigate = useNavigate();
-
-  const BASE_URL = "http://gateway.marvel.com/v1/public/characters?";
 
   const ts = Number(new Date());
 
@@ -28,62 +31,53 @@ const SetAPI = () => {
       (Cookies.get("UserPublicApi") ?? "")
   );
 
-  const [isLoading, setIsLoading] = useState(true);
+  const setIsLoading = useLoading((state) => state.setIsLoading);
+  const isLoading = useLoading((state) => state.isLoading);
 
-  // Use Effect para checar se já existem os cookies com as autenticações.
-  useEffect(() => {
+  // Função para checar se já existem os cookies com as autenticações.
+
+  function fetchData() {
     axios
       .get(
-        `${BASE_URL}ts=${ts}&apikey=${Cookies.get(
+        `${BASE_URL_CHARACTERS}ts=${ts}&apikey=${Cookies.get(
           "UserPublicApi"
         )}&hash=${hashCookies}`
       )
       .then((response) => {
         console.log(response.data.data);
-        toast.success("Autenticado com Sucesso");
+        setIsAuthenticated(true);
         setIsLoading(false);
-        navigate('/Home');
+        navigate("/Home");
       })
       .catch((error) => {
         console.log(error);
         toast.warning("Certifique-se de estar autenticado");
-        setIsLoading(false);
       });
-  }, [history]);
-
-  if (isLoading) {
-    return (
-      <h1>
-        <Rotate>🕷</Rotate>
-      </h1>
-    );
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     Cookies.set("UserPrivateApi", privateApi, { expires: 7 });
     Cookies.set("UserPublicApi", publicApi, { expires: 7 });
 
-    try {
-      const response = await axios.get(
-        `${BASE_URL}ts=${ts}&apikey=${publicApi}&hash=${hash}`
-      );
-      console.log(response);
-      navigate('/Home');
-      toast.success('Autenticado com sucesso.')
-    } catch (error) {
-      console.log(error);
-      if (error instanceof AxiosError) {
-        if (error?.response?.status === 401) {
-          toast.error("Verifique as credenciais informadas");
-        }
-      }
-    }
+    fetchData();
   };
+  console.log("entrou na pagina setapi shaodre")
+  useEffect(() => {
+    if (
+      !isAuthenticated &&
+      Cookies.get(CookiesName.UserPrivateApi) &&
+      Cookies.get(CookiesName.UserPublicApi)
+    ) {
+      fetchData();
+      
+    }
+  }, []);
 
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div>
-      <GlobalStyle />
-      <Toaster richColors position="top-center" closeButton />
       <FormContainer>
         <Input
           placeholder="Your Public Key"
@@ -99,6 +93,8 @@ const SetAPI = () => {
           Enviar
         </Button>
       </FormContainer>
+      <GlobalStyle />
+      <Toaster richColors position="top-center" closeButton />
     </div>
   );
 };

@@ -123,3 +123,17 @@ deste desafio. No entanto, caso você seja capaz de realizá-la no tempo
 disponível, isso certamente será impressionante!
 
 
+
+
+
+Usuario logou.
+sucesso => setou cookies
+
+saiu da aplicação
+e voltou,
+CHECAR SE EXISTE => CHECAR SE É VALIDO. (REQUISICAO COM STATUS 200 = OK)
+
+NAO EXISTE, ALTERADO => VOLTAR PARA TELA DE LOGIN
+
+erro => nada
+

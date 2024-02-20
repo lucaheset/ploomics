@@ -4,6 +4,7 @@ import md5 from "md5";
 import SetAPI from "./Components/SetAPI";
 import Home from "./Pages/Home";
 import GlobalStyle from "./styles/global";
+import { Toaster } from "sonner";
 
 export default function App() {
   const [data, setData] = useState([]);
@@ -18,6 +19,7 @@ export default function App() {
 
   return (
     <div>
+      <Toaster position="top-center" richColors closeButton/>
       <GlobalStyle/>
       <Home />
       <SetAPI />
