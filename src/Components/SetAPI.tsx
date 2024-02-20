@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import styled from "styled-components";
 import { Button, FormContainer, Input } from "../styles/ApiInputButtonStyles";
 import axios, { AxiosError } from "axios";
 import md5 from "md5";
 import { Toaster, toast } from "sonner";
-import { Rotate } from "../styles/IsLoadingStyle";
 import GlobalStyle from "../styles/global";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Storage/useAuth";
-import { BASE_URL_CHARACTERS, CookiesName } from "../Constants";
+import { BASE_URL_CHARACTERS, CookiesName, hashCookies, ts } from "../Constants";
 import { useLoading } from "../Storage/useLoading";
 import Loading from "./Loading";
+import Skeleton from "react-loading-skeleton";
 
 const SetAPI = () => {
   const [privateApi, setPrivateApi] = useState("");
@@ -21,15 +21,6 @@ const SetAPI = () => {
 
   const navigate = useNavigate();
 
-  const ts = Number(new Date());
-
-  const hash = md5(ts + privateApi + publicApi);
-
-  const hashCookies = md5(
-    ts +
-      (Cookies.get("UserPrivateApi") ?? "") +
-      (Cookies.get("UserPublicApi") ?? "")
-  );
 
   const setIsLoading = useLoading((state) => state.setIsLoading);
   const isLoading = useLoading((state) => state.isLoading);
@@ -43,13 +34,13 @@ const SetAPI = () => {
           "UserPublicApi"
         )}&hash=${hashCookies}`
       )
-      .then((response) => {
-        console.log(response.data.data);
+      .then(() => {
         setIsAuthenticated(true);
         setIsLoading(false);
         navigate("/Home");
       })
       .catch((error) => {
+
         console.log(error);
         toast.warning("Certifique-se de estar autenticado");
       });
@@ -61,7 +52,7 @@ const SetAPI = () => {
 
     fetchData();
   };
-  console.log("entrou na pagina setapi shaodre")
+
   useEffect(() => {
     if (
       !isAuthenticated &&
@@ -78,6 +69,7 @@ const SetAPI = () => {
   }
   return (
     <div>
+      <Toaster richColors position="bottom-right" closeButton />
       <FormContainer>
         <Input
           placeholder="Your Public Key"
@@ -94,7 +86,7 @@ const SetAPI = () => {
         </Button>
       </FormContainer>
       <GlobalStyle />
-      <Toaster richColors position="top-center" closeButton />
+      
     </div>
   );
 };

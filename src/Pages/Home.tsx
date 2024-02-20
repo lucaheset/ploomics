@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import GlobalStyle from '../styles/global'
-import { Toaster, toast } from 'sonner'
-import axios from 'axios'
-import { BASE_URL_CHARACTERS } from '../Constants'
-import Cookies from 'js-cookie'
-import { Link, useNavigate } from 'react-router-dom'
-import md5 from 'md5'
-import { useAuth } from '../Storage/useAuth'
-import { useLoading } from '../Storage/useLoading'
-import Loading from '../Components/Loading'
-
-
+import React, { useEffect, useState } from "react";
+import GlobalStyle from "../styles/global";
+import { Toaster, toast } from "sonner";
+import axios from "axios";
+import { BASE_URL_CHARACTERS, CookiesName } from "../Constants";
+import Cookies from "js-cookie";
+import { Link, useNavigate } from "react-router-dom";
+import md5 from "md5";
+import { useAuth } from "../Storage/useAuth";
+import { useLoading } from "../Storage/useLoading";
+import Loading from "../Components/Loading";
+import Header from "../Components/Header";
 
 // const ts = Number(new Date());
 
@@ -23,41 +22,31 @@ import Loading from '../Components/Loading'
 // );
 
 export default function Home() {
+  const isAuthenticated = useAuth((state) => state.isAuthenticated);
+  const navigate = useNavigate();
 
-  
-  const isAuthenticated = useAuth((state) => state.isAuthenticated)
-  const navigate = useNavigate()
-
-  const setIsLoading = useLoading((state) => state.setIsLoading)
+  const setIsLoading = useLoading((state) => state.setIsLoading);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/')
+    if (
+      isAuthenticated == false &&
+      !Cookies.get(CookiesName.UserPrivateApi) &&
+      !Cookies.get(CookiesName.UserPublicApi)
+    ) {
+      navigate("/");
     }
-  }, [])
+    else{
+      toast.success("Autenticado com sucesso.")
+    }
+  }, []);
 
-  
   return (
-
     <div>
+      <Toaster richColors position="bottom-right" closeButton />
+      <Header />
       <Loading />
       <GlobalStyle />
-        <div className='header'>
-            <li>
-              <Link to={"/Characters"}>Characters</Link>
-            </li>
-            <li>
-              <Link to={"/Comics"}>Comics</Link>
-            </li>
-            <li>
-              <Link to={"/Creators"}>Creators</Link>
-            </li>
-            <li>
-              <Link to={"/Logout"}>Log Out</Link>
-            </li>
-        </div>
+
     </div>
-
-  )
+  );
 }
-

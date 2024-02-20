@@ -1,24 +1,31 @@
 import { useLoading } from "../Storage/useLoading";
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import { Rotate } from "../styles/IsLoadingStyle";
+import GlobalStyle from "../styles/global";
 
 const Loading = () => {
+  let setIsLoading = useLoading((state) => state.setIsLoading);
 
-    let setIsLoading = useLoading((state) => state.setIsLoading)
+  let isLoading = useLoading((state) => state.isLoading);
 
-    let isLoading = useLoading((state) => state.isLoading)
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }, []);
 
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 1000)
-    }, [])
+  if (isLoading) {
+    return (
+      <div>
+        <GlobalStyle />
+        <h1>
+          <Rotate>🕷</Rotate>
+        </h1>
 
-    if(isLoading) {
-        return (
-            <h1><Rotate>🕷</Rotate></h1>
-        )
-    }       
-}
+        
+      </div>
+    );
+  }
+};
 
-export default Loading
+export default Loading;

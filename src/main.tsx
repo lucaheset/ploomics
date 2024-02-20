@@ -9,9 +9,9 @@ import SetAPI from './Components/SetAPI.tsx';
 import GlobalStyle from './styles/global.ts';
 import Home from './Pages/Home.tsx';
 import Logout from './Pages/Logout.tsx';
-import Characters from './Pages/Characters.tsx';
-import Comics from './Pages/Comics.tsx';
-import Creators from './Pages/Creators.tsx';
+import Characters from './Pages/Characters/Characters.tsx';
+import Comics from './Pages/Comics/Comics.tsx';
+import Creators from './Pages/Creators/Creators.tsx';
 
 
 const router = createBrowserRouter([
