@@ -8,32 +8,32 @@ export default function Header() {
   return (
     <div>
       <Headers>
-        {location.pathname !== "/Home" && (
-          <Link to={"/Home"} className="link-style">
+        {location.pathname !== "/home" && (
+          <Link to={"/home"} className="link-style">
             <h2>Home</h2>
           </Link>
         )}
 
-        {location.pathname !== "/Characters" && (
-          <Link to={"/Characters"} className="link-style">
+        {location.pathname !== "/characters" && (
+          <Link to={"/characters"} className="link-style">
             <h2>Characters</h2>
           </Link>
         )}
 
-        {location.pathname !== "/Comics" && (
-          <Link to={"/Comics"} className="link-style">
+        {location.pathname !== "/comics" && (
+          <Link to={"/comics"} className="link-style">
             <h2>Comics</h2>
           </Link>
         )}
 
-        {location.pathname !== "/Creators" && (
-          <Link to={"/Creators"} className="link-style">
+        {location.pathname !== "/creators" && (
+          <Link to={"/creators"} className="link-style">
             <h2>Creators</h2>
           </Link>
         )}
 
-        {location.pathname !== "/Logout" && (
-          <Link to={"/Logout"} className="link-style-logout">
+        {location.pathname !== "/logout" && (
+          <Link to={"/logout"} className="link-style-logout">
             <h2>Log Out</h2>
           </Link>
         )}

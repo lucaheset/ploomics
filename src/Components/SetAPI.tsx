@@ -37,7 +37,7 @@ const SetAPI = () => {
       .then(() => {
         setIsAuthenticated(true);
         setIsLoading(false);
-        navigate("/Home");
+        navigate("/home");
       })
       .catch((error) => {
 

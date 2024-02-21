@@ -44,6 +44,7 @@ const Creators = () => {
         setHasMore(newData.length > 0);
         setOffset((prevOffset) => prevOffset + newData.length); // Atualizar o offset corretamente
         setLoading(false);
+        console.log(newData)
       })
       .catch((error) => {
         console.log(error);
@@ -73,7 +74,7 @@ const Creators = () => {
           <CardList>
             {creators.map((creator: any) => (
               <Card thumbnail={{extension: creator.thumbnail.extension, path: creator.thumbnail.path}} key={creator.id}
-              onClick={() => navigate(`/Creator/${creator.id}`)}
+              onClick={() => navigate(`/creators/${creator.id}`)}
               >
                 <div
                   id="img"

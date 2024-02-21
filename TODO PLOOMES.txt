@@ -24,8 +24,8 @@ Telas de listagem:
 Funcionalidades satisfatórias (Dr Estranho)
 Tela do item:
 
-Deve ser possível clicar nos itens listados (personagens, quadrinhos e
-criadores) e abrir uma tela contendo seus detalhes;
+        Deve ser possível clicar nos itens listados (personagens, quadrinhos e
+        criadores) e abrir uma tela contendo seus detalhes;
 
 Busca por nome:
 Todas as 3 telas (personagens, quadrinhos e criadores), devem ter busca por
@@ -91,8 +91,8 @@ Links entre as entidades:
 Ao final de todas as entidades exibir os itens relacionados, como personagens,
 quadrinhos, criadores, etc;
 
-Também deve ser possível clicar no item relacionado e abrir a tela de descrição
-desse item;
+        Também deve ser possível clicar no item relacionado e abrir a tela de descrição
+        desse item;
 
 Tela de itens favoritos:
 

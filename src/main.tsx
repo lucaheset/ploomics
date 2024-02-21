@@ -14,6 +14,7 @@ import Comics from './Pages/Comics/Comics.tsx';
 import Creators from './Pages/Creators/Creators.tsx';
 import ComicDetail from './Pages/Comics/ComicDetails.tsx';
 import CharacterDetail from './Pages/Characters/CharacterDetails.tsx';
+import CreatorDetails from './Pages/Creators/CreatorDetails.tsx';
 
 
 const router = createBrowserRouter([
@@ -22,36 +23,36 @@ const router = createBrowserRouter([
     element: <SetAPI />
   },
 {
-  path: "/Home",
+  path: "/home",
   element: <Home />
 },
 {
-  path: "/Logout",
+  path: "/logout",
   element: <Logout />
 },
 {
-  path: "/Characters",
+  path: "/characters",
   element: <Characters />
 },
 {
-  path: "/Comics",
+  path: "/comics",
   element: <Comics />
 },
 {
-  path: "/Creators",
+  path: "/creators",
   element: <Creators />
 },
 {
-  path: "/Character/:characterId",
+  path: "/characters/:characterId",
   element: <CharacterDetail />
 },
 {
-  path: "/Comics/:comicId",
+  path: "/comics/:comicId",
   element: <ComicDetail />,
 },
 {
-  path: "/Creators/:creatorId",
-  element: <ComicDetail />,
+  path: "/creators/:creatorId",
+  element: <CreatorDetails />,
 },
 
 

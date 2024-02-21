@@ -54,6 +54,7 @@ const Comics = () => {
         setHasMore(newUniqueComics.length > 0);
         setOffset((prevOffset) => prevOffset + newUniqueComics.length);
         setLoading(false);
+        console.log(newData)
       })
       .catch((error) => {
         console.log(error);

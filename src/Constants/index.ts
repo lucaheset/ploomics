@@ -12,10 +12,6 @@ export const BASE_URL_CREATORS = "http://gateway.marvel.com/v1/public/creators"
 
 export const ts = Number(new Date());
 
-
-// export const hash = md5(ts + privateApi + publicApi);
-
-
 export const hashCookies = md5(
     ts +
       (Cookies.get("UserPrivateApi") ?? "") +
