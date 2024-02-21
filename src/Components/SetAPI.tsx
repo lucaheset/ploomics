@@ -30,7 +30,7 @@ const SetAPI = () => {
   function fetchData() {
     axios
       .get(
-        `${BASE_URL_CHARACTERS}ts=${ts}&apikey=${Cookies.get(
+        `${BASE_URL_CHARACTERS}?ts=${ts}&apikey=${Cookies.get(
           "UserPublicApi"
         )}&hash=${hashCookies}`
       )
@@ -42,7 +42,7 @@ const SetAPI = () => {
       .catch((error) => {
 
         console.log(error);
-        toast.warning("Certifique-se de estar autenticado");
+        toast.warning("Certifique-se de colocar suas credenciais.");
       });
   }
 

@@ -13,9 +13,10 @@ export const Headers = styled.div`
   border: none;
   border-radius: 5px;
   height: 50px;
-  margin-top: 20px;
+  
   margin-bottom: 20px;
   width: 100%;
+  padding: 2rem;
  
 
   .logout {

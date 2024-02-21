@@ -1,11 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {
-  BASE_URL_CHARACTERS,
-  BASE_URL_CREATORS,
-  CookiesName,
-  hashCookies,
-  ts,
-} from "../../Constants";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
 import Cookies from "js-cookie";
@@ -13,47 +6,55 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Storage/useAuth";
 import { useLoading } from "../../Storage/useLoading";
 import Header from "../../Components/Header";
-import { Card, CardList, Container } from "../Characters/styles";
+import { Card, CardList, Container } from "../../styles/styles";
 import Skeleton from "react-loading-skeleton";
 import GlobalStyle from "../../styles/global";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { BASE_URL_CREATORS, hashCookies, ts } from "../../Constants";
+import Loading from "../../Components/Loading";
 
 const Creators = () => {
   const setIsAuthenticated = useAuth((state) => state.setIsAuthenticated);
   const isAuthenticated = useAuth((state) => state.isAuthenticated);
-
   const navigate = useNavigate();
 
-  const [creators, setCreators] = useState([]);
+  const [creators, setCreators] = useState<any[]>([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [offset, setOffset] = useState(0);
 
   const setIsLoading = useLoading((state) => state.setIsLoading);
-  const isLoading = useLoading((state) => state.isLoading);
 
-  function fetchData() {
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
+    setLoading(true);
     axios
       .get(
-        `${BASE_URL_CREATORS}ts=${ts}&apikey=${Cookies.get(
+        `${BASE_URL_CREATORS}?ts=${ts}&apikey=${Cookies.get(
           "UserPublicApi"
-        )}&hash=${hashCookies}`
+        )}&hash=${hashCookies}&offset=${offset}`
       )
       .then((response) => {
-        const creatorData = response.data.data.results;
+        const newData = response.data.data.results;
         setIsAuthenticated(true);
-        setIsLoading(false);
-        setCreators(creatorData);
-        console.log(creatorData)
+        setCreators((prevCreators) => [...prevCreators, ...newData]);
+        setHasMore(newData.length > 0);
+        setOffset((prevOffset) => prevOffset + newData.length); // Atualizar o offset corretamente
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        toast.warning("Certifique-se de estar autenticado");
-        navigate("/");
+        toast.warning("Erro ao carregar criadores.");
+        setLoading(false);
       });
-  }
+  };
 
-  useEffect(() => {
-    {
-      fetchData();
-    }
-  }, []);
+  const fetchMoreData = () => {
+    fetchData();
+  };
 
   return (
     <div>
@@ -61,34 +62,41 @@ const Creators = () => {
       <Header />
       <Container>
         <GlobalStyle />
-        <CardList>
-          {creators.map((creators: any) => {
-            return (
-              <Card key={creators.id} thumbnail={creators.thumbnail}>
-                <div id="img" />
-                <h2>{creators.fullName}</h2>
+        <InfiniteScroll
+          dataLength={creators.length}
+          next={fetchMoreData}
+          hasMore={hasMore}
+          loader={<Loading/>}
+          endMessage={<p>Fim dos criadores</p>}
+          scrollThreshold={0.9}
+        >
+          <CardList>
+            {creators.map((creator: any) => (
+              <Card thumbnail={{extension: creator.thumbnail.extension, path: creator.thumbnail.path}} key={creator.id}
+              onClick={() => navigate(`/Creator/${creator.id}`)}
+              >
+                <div
+                  id="img"
+                  style={{ backgroundImage: `url(${creator.thumbnail.path}.${creator.thumbnail.extension})` }}
+                />
+                <h2>{creator.fullName}</h2>
                 <p>
-                  Personagens:
-                  {creators.comics.items.length > 0
-                    ? creators.comics.items.map(
-                        (comics: any, index: number) => (
-                          <span key={index}>
-                            {typeof comics === "string"
-                              ? comics
-                              : comics && comics.name}{" "}
-                            {index < creators.characters.items.length - 1 && ", "}
-                          </span>
-                        )
-                      )
-                    : "Não foram encontrados personagens na base de dados."}
+                  Comics:{" "}
+                  {creator.comics && creator.comics.items && creator.comics.items.length > 0 ? (
+                    creator.comics.items.map((comic: any, index: number) => (
+                      <span key={index}>
+                        {typeof comic === "string" ? comic : comic && comic.name} {index < creator.comics.items.length - 1 && ", "}
+                      </span>
+                    ))
+                  ) : (
+                    <span>Não foram encontrados Comics desse Criador na base de dados.</span>
+                  )}
                 </p>
-             
               </Card>
-            );
-          })}
-        </CardList>
+            ))}
+          </CardList>
+        </InfiniteScroll>
       </Container>
-      <GlobalStyle />
     </div>
   );
 };

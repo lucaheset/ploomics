@@ -15,13 +15,13 @@ export const Container = styled.div`
 `;
 
 export const CardList = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 230px;
- 
-    border-radius: 5px;
-`;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 
+  border-radius: 5px;
+`;
 
 export const Card = styled.div<ThumbnailData>`
   background-color: #f1f1f1;
@@ -32,13 +32,14 @@ export const Card = styled.div<ThumbnailData>`
   overflow: hidden;
   box-shadow: 2px 2px 10px 1 rgba(0, 0, 0, 0.3);
   cursor: pointer;
-
+  align-items: center;
+  justify-content: center;
   h2,
   p {
+    margin-top: .3rem;
     padding: 5px;
     text-align: center;
-  
-    
+   
   }
   p {
     padding: 70px 0;
@@ -55,11 +56,13 @@ export const Card = styled.div<ThumbnailData>`
     transition: all 1s;
   }
 
-  
   &:hover {
     div#img {
-        height: 100px;
-    
+      height: 100px;
     }
   }
 `;
+
+export const DetailedCard = styled.div`
+
+`

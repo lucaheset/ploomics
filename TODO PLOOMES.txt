@@ -15,14 +15,15 @@ Tela de autenticação:
 
 Telas de listagem:
 
-Deve haver 3 telas de listagem de itens, sendo, personagens, quadrinhos e
-criadores;
+        Deve haver 3 telas de listagem de itens, sendo, personagens, quadrinhos e
+        criadores;
 
-Todas as telas de listagem devem ter infinity scroll ou paginação;
+        Todas as telas de listagem devem ter infinity scroll ou paginação;
 
 
 Funcionalidades satisfatórias (Dr Estranho)
 Tela do item:
+
 Deve ser possível clicar nos itens listados (personagens, quadrinhos e
 criadores) e abrir uma tela contendo seus detalhes;
 
@@ -137,3 +138,12 @@ NAO EXISTE, ALTERADO => VOLTAR PARA TELA DE LOGIN
 
 erro => nada
 
+
+
+
+FLUXO DYNAMIC ROUTE
+ID NO URL
+
+PUXAR ID DA URL
+
+DISPLAY COMIC

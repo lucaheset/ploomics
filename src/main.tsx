@@ -12,6 +12,8 @@ import Logout from './Pages/Logout.tsx';
 import Characters from './Pages/Characters/Characters.tsx';
 import Comics from './Pages/Comics/Comics.tsx';
 import Creators from './Pages/Creators/Creators.tsx';
+import ComicDetail from './Pages/Comics/ComicDetails.tsx';
+import CharacterDetail from './Pages/Characters/CharacterDetails.tsx';
 
 
 const router = createBrowserRouter([
@@ -38,7 +40,22 @@ const router = createBrowserRouter([
 {
   path: "/Creators",
   element: <Creators />
-}
+},
+{
+  path: "/Character/:characterId",
+  element: <CharacterDetail />
+},
+{
+  path: "/Comics/:comicId",
+  element: <ComicDetail />,
+},
+{
+  path: "/Creators/:creatorId",
+  element: <ComicDetail />,
+},
+
+
+
 
 
 ]);
