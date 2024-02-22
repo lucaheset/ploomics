@@ -1,69 +1,67 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import App from './App.tsx'
-import SetAPI from './Components/SetAPI.tsx';
-import GlobalStyle from './styles/global.ts';
-import Home from './Pages/Home.tsx';
-import Logout from './Pages/Logout.tsx';
-import Characters from './Pages/Characters/Characters.tsx';
-import Comics from './Pages/Comics/Comics.tsx';
-import Creators from './Pages/Creators/Creators.tsx';
-import ComicDetail from './Pages/Comics/ComicDetails.tsx';
-import CharacterDetail from './Pages/Characters/CharacterDetails.tsx';
-import CreatorDetails from './Pages/Creators/CreatorDetails.tsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ThemeProviderWrapper } from "./Components/ThemeContext"; // Ajuste o caminho conforme necessário
+import GlobalStyle from "./styles/global";
+import Home from "./Pages/Home";
+import Logout from "./Pages/Logout";
+import Characters from "./Pages/Characters/Characters";
+import Comics from "./Pages/Comics/Comics";
+import Creators from "./Pages/Creators/Creators";
+import ComicDetail from "./Pages/Comics/ComicDetails";
+import CharacterDetail from "./Pages/Characters/CharacterDetails";
+import CreatorDetails from "./Pages/Creators/CreatorDetails";
+import SetAPI from "./Components/SetAPI";
+
+
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SetAPI />
+    element: <SetAPI />,
   },
-{
-  path: "/home",
-  element: <Home />
-},
-{
-  path: "/logout",
-  element: <Logout />
-},
-{
-  path: "/characters",
-  element: <Characters />
-},
-{
-  path: "/comics",
-  element: <Comics />
-},
-{
-  path: "/creators",
-  element: <Creators />
-},
-{
-  path: "/characters/:characterId",
-  element: <CharacterDetail />
-},
-{
-  path: "/comics/:comicId",
-  element: <ComicDetail />,
-},
-{
-  path: "/creators/:creatorId",
-  element: <CreatorDetails />,
-},
-
-
-
-
-
+  {
+    path: "/home",
+    element: <Home />,
+  },
+  {
+    path: "/logout",
+    element: <Logout />,
+  },
+  {
+    path: "/characters",
+    element: <Characters />,
+  },
+  {
+    path: "/comics",
+    element: <Comics />,
+  },
+  {
+    path: "/creators",
+    element: <Creators />,
+  },
+  {
+    path: "/characters/:characterId",
+    element: <CharacterDetail />,
+  },
+  {
+    path: "/comics/:comicId",
+    element: <ComicDetail />,
+  },
+  {
+    path: "/creators/:creatorId",
+    element: <CreatorDetails />,
+  },
 ]);
+const rootElement = document.getElementById("root");
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  
-    <RouterProvider router={router} />
-
-  
-)
+if (rootElement !== null) {
+  ReactDOM.createRoot(rootElement).render(
+    <ThemeProviderWrapper>
+      <RouterProvider router={router} />
+    </ThemeProviderWrapper>
+  );
+} else {
+  console.error("Failed to find the root element");
+}

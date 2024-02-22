@@ -19,10 +19,10 @@ export default function App() {
 
   return (
     <div>
-      <Toaster position="top-center" richColors closeButton/>
+      {/* <Toaster position="top-center" richColors closeButton/>
       <GlobalStyle/>
       <Home />
-      <SetAPI />
+      <SetAPI /> */}
       
     </div>
   );

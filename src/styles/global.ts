@@ -1,5 +1,8 @@
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import img from "../img/erik-mclean-8SeJUmfahu0-unsplash.jpg";
+
+
+
 
 const GlobalStyle = createGlobalStyle`
 
@@ -44,6 +47,25 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 700;
         font-style: italic;
       }
+
+      html::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      html::-webkit-scrollbar-track {
+        background: #801;
+      }
+
+      html::-webkit-scrollbar-thumb {
+        background: #f88;
+        transition: 0.5s;
+      }
+
+      html::-webkit-scrollbar-thumb:hover {
+        background: #f55;
+    
+      }
+
 
 `;
 

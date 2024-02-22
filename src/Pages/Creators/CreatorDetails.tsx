@@ -1,14 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { BASE_URL_CREATORS, ts, hashCookies } from "../../Constants";
-import Comics from "../Comics/Comics";
 import { Link, useParams } from "react-router-dom";
-import Creators from "./Creators";
 import Cookies from "js-cookie";
 import Header from "../../Components/Header";
 import GlobalStyle from "../../styles/global";
 import { Container, CardList, DetailedCard } from "../../styles/styles";
+import Loading from "../../Components/Loading";
 
 interface Comic {
   name: string;
@@ -65,7 +64,7 @@ const CreatorDetails = () => {
       <Header />
       <Container>
         {loading ? (
-          <p>Loading...</p>
+          <Loading />
         ) : creatorDetail ? (
           <CardList>
             <DetailedCard thumbnail={creatorDetail.thumbnail}>
@@ -75,11 +74,9 @@ const CreatorDetails = () => {
                 Comics:
                 {creatorDetail.comics.items.length > 0
                   ? creatorDetail.comics.items.map((comic, index) => {
-                      // Aqui você extrai o ID da comic do resourceURI
                       const comicId = comic.resourceURI.split("/").pop();
                       return (
                         <span key={index}>
-                          {/* Use o comicId para criar o Link */}
                           <Link to={`/comics/${comicId}`}>
                             {comic.name}
                           </Link>

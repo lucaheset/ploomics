@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import styled from "styled-components";
 import { Button, FormContainer, Input } from "../styles/ApiInputButtonStyles";
-import axios, { AxiosError } from "axios";
-import md5 from "md5";
+import axios  from "axios";
 import { Toaster, toast } from "sonner";
 import GlobalStyle from "../styles/global";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +9,7 @@ import { useAuth } from "../Storage/useAuth";
 import { BASE_URL_CHARACTERS, CookiesName, hashCookies, ts } from "../Constants";
 import { useLoading } from "../Storage/useLoading";
 import Loading from "./Loading";
-import Skeleton from "react-loading-skeleton";
+
 
 const SetAPI = () => {
   const [privateApi, setPrivateApi] = useState("");
@@ -25,7 +23,6 @@ const SetAPI = () => {
   const setIsLoading = useLoading((state) => state.setIsLoading);
   const isLoading = useLoading((state) => state.isLoading);
 
-  // Função para checar se já existem os cookies com as autenticações.
 
   function fetchData() {
     axios

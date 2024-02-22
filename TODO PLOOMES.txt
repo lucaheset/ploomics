@@ -27,9 +27,6 @@ Tela do item:
         Deve ser possível clicar nos itens listados (personagens, quadrinhos e
         criadores) e abrir uma tela contendo seus detalhes;
 
-Busca por nome:
-Todas as 3 telas (personagens, quadrinhos e criadores), devem ter busca por
-nome;
 
 Dark mode:
 Permitir a mudança temporária do esquema cromático, de forma que ao ser
@@ -147,3 +144,5 @@ ID NO URL
 PUXAR ID DA URL
 
 DISPLAY COMIC
+
+linha do tempo sort

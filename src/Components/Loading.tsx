@@ -1,6 +1,6 @@
 import { useLoading } from "../Storage/useLoading";
-import React, { useEffect } from "react";
-import { Rotate } from "../styles/IsLoadingStyle";
+import { useEffect } from "react";
+import { LoadingDiv, Rotate } from "../styles/IsLoadingStyle";
 import GlobalStyle from "../styles/global";
 
 const Loading = () => {
@@ -18,11 +18,10 @@ const Loading = () => {
     return (
       <div>
         <GlobalStyle />
-        <h1>
-          <Rotate>🕷</Rotate>
-        </h1>
 
-        
+          <LoadingDiv>
+            <Rotate>🕷</Rotate>
+          </LoadingDiv>
       </div>
     );
   }

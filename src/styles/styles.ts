@@ -12,6 +12,8 @@ export const Container = styled.div`
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
+  padding-left: 10%;
+  box-sizing: border-box;
 `;
 
 export const CardList = styled.div`
@@ -19,11 +21,13 @@ export const CardList = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  
   border-radius: 10px;
 `;
 
 export const Card = styled.div<ThumbnailData>`
+
+background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.color};
   background-color: #f1f1f1;
   height: 450px;
   width: 300px;
@@ -34,6 +38,8 @@ export const Card = styled.div<ThumbnailData>`
   cursor: pointer;
   align-items: center;
   justify-content: center;
+  
+  
   h2,
   p {
     margin-top: .3rem;
@@ -65,19 +71,19 @@ export const Card = styled.div<ThumbnailData>`
 `;
 
 export const DetailedCard = styled.div<ThumbnailData>`
-  display: flex; /* This will make it a flex container */
-  flex-direction: column; /* Align children vertically */
-  align-items: center; /* Center children horizontally */
-  justify-content: center; /* Center children vertically */
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
   background-color: #f1f1f1;
-  height: 60%; /* Adjusted to 60% of its parent's height for better visibility */
-  width: 40%; /* Adjusted to 40% of its parent's width for better visibility */
-  margin: auto; /* This will center the card in the parent container */
+  height: 60%; 
+  width: 40%; 
+  margin: auto;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 2px 2px 10px 1 rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  position: relative; /* Added for positioning of children absolute if needed */
+  position: relative; 
 
   h2,
   p {
@@ -86,17 +92,21 @@ export const DetailedCard = styled.div<ThumbnailData>`
   }
 
   p {
-    padding: 1rem; /* Give some padding around the text */
+    padding: 1rem; 
   }
 
   div#img {
-    width: 100%; /* Image should fill the width of the card */
+    width: 100%; 
     background-image: ${({ thumbnail }) =>
       `url(${thumbnail.path}.${thumbnail.extension})`};
     background-size: cover;
-    background-position: center; /* Center the background image */
+    background-position: center;
     transition: all 1s;
   }
 
 
-`;
+
+`
+
+
+;

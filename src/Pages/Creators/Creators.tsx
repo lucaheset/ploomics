@@ -1,75 +1,116 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../Storage/useAuth";
-import { useLoading } from "../../Storage/useLoading";
 import Header from "../../Components/Header";
 import { Card, CardList, Container } from "../../styles/styles";
-import Skeleton from "react-loading-skeleton";
 import GlobalStyle from "../../styles/global";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { BASE_URL_CREATORS, hashCookies, ts } from "../../Constants";
 import Loading from "../../Components/Loading";
+import SideBar from "../../Components/SideBar";
 
 const Creators = () => {
-  const setIsAuthenticated = useAuth((state) => state.setIsAuthenticated);
-  const isAuthenticated = useAuth((state) => state.isAuthenticated);
   const navigate = useNavigate();
 
   const [creators, setCreators] = useState<any[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [offset, setOffset] = useState(0);
+  const [qtd, setQtd] = useState(0);
 
-  const setIsLoading = useLoading((state) => state.setIsLoading);
+
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const fetchData = () => {
+  function fetchData(search?: string, newSearch: boolean = false, offset: number = 0) {
+    if (loading) return;
+
+
+    if (newSearch) {
+      setCreators([]);
+      setQtd(0);
+    }
+
     setLoading(true);
-    axios
-      .get(
-        `${BASE_URL_CREATORS}?ts=${ts}&apikey=${Cookies.get(
-          "UserPublicApi"
-        )}&hash=${hashCookies}&offset=${offset}`
-      )
+
+    const requestURL = search
+    ? `${BASE_URL_CREATORS}?firstNameStartsWith=${search}&ts=${ts}&apikey=${Cookies.get(
+        "UserPublicApi"
+      )}&hash=${hashCookies}&offset=${offset}`
+    : `${BASE_URL_CREATORS}?ts=${ts}&apikey=${Cookies.get(
+        "UserPublicApi"
+      )}&hash=${hashCookies}&offset=${offset}`;
+
+      axios
+      .get(requestURL)
       .then((response) => {
-        const newData = response.data.data.results;
-        setIsAuthenticated(true);
-        setCreators((prevCreators) => [...prevCreators, ...newData]);
-        setHasMore(newData.length > 0);
-        setOffset((prevOffset) => prevOffset + newData.length); // Atualizar o offset corretamente
         setLoading(false);
-        console.log(newData)
+        const newData = response.data.data.results;
+  
+        if (newSearch || (offset === 0 && creators.length === 0)) {
+          setCreators(newData);
+        } else {
+      
+          setCreators((prevCreators) => {
+            const filteredData = newData.filter(
+              (newCreator: { id: number }) =>
+                !prevCreators.some(
+                  (prevComic) => prevComic.id === newCreator.id
+                )
+            );
+            return [...prevCreators, ...filteredData];
+          });
+        }
+  
+        setHasMore(newData.length > 0);
+        if (!newSearch || !search) {
+          setQtd((prevOffset) => prevOffset + 19);
+        }
       })
       .catch((error) => {
         console.log(error);
-        toast.warning("Erro ao carregar criadores.");
+        toast.warning("Certifique-se de estar autenticado");
+        navigate("/");
+      })
+      .finally(() => {
         setLoading(false);
       });
-  };
+    }
+
+
+    const onNewSearchValue = (newValue: string) => {
+      setSearchValue(newValue);
+      fetchData(newValue, true);
+    };
 
   const fetchMoreData = () => {
-    fetchData();
+    if (!loading && hasMore) {
+      fetchData(searchValue, false, qtd);
+    }
+  
   };
 
+  const t = 16;
+
+    const threshold = (qtd - t) / qtd;
   return (
     <div>
       <Toaster richColors position="bottom-right" closeButton />
       <Header />
       <Container>
         <GlobalStyle />
+        <SideBar onSearchClick={onNewSearchValue} />
         <InfiniteScroll
           dataLength={creators.length}
           next={fetchMoreData}
           hasMore={hasMore}
           loader={<Loading/>}
-          endMessage={<p>Fim dos criadores</p>}
-          scrollThreshold={0.9}
+          endMessage={<h2>Fim dos criadores</h2>}
+          scrollThreshold={threshold}
         >
           <CardList>
             {creators.map((creator: any) => (

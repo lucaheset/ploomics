@@ -1,8 +1,6 @@
-import React from "react";
 import Cookies from "js-cookie";
-import SetAPI from "../Components/SetAPI";
 import { CookiesName } from "../Constants";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import GlobalStyle from "../styles/global";
 
 const Logout = () => {

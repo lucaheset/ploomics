@@ -1,27 +1,25 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { BASE_URL_COMICS, ts, hashCookies } from "../../Constants";
 import Cookies from "js-cookie";
 import { CardList, Container, DetailedCard } from "../../styles/styles";
 import GlobalStyle from "../../styles/global";
 import Header from "../../Components/Header";
+import Loading from "../../Components/Loading";
 
-// Definição da interface Character
 interface Character {
   resourceURI: string;
   name: string;
-  // Add other character properties as needed
 }
 
 interface Comics {
   title: string;
-  // Define `characters` as an object with an `items` array
   characters: {
     available: number;
     resourceURI: string;
-    items: Character[]; // Assuming `items` is an array of `Character` objects
+    items: Character[]; 
     returned: number;
   };
   thumbnail: {
@@ -30,8 +28,7 @@ interface Comics {
   };
 }
 const ComicDetail = () => {
-  const { comicId } = useParams(); // Pega o comicId da URL
-  const navigate = useNavigate();
+  const { comicId } = useParams();
   const [loading, setLoading] = useState(false);
   const [comicDetail, setComicDetail] = useState<Comics | null>(null);
 
@@ -61,23 +58,21 @@ const ComicDetail = () => {
       <Header />
       <Container>
         {loading ? (
-          <p>Loading...</p>
+          <Loading />
         ) : comicDetail ? (
           <CardList>
             <DetailedCard thumbnail={comicDetail.thumbnail}>
-              <div id="img" /> {/* Esta div mostrará a imagem de fundo */}
+              <div id="img" /> 
               <h2>{comicDetail.title}</h2>
-              {/* Garanta que a descrição seja renderizada aqui embaixo */}
+              
               <p>
                 Characters
                 {comicDetail.characters.items.length > 0
                   ? comicDetail.characters.items.map((characters, index) => {
-                      // Aqui você extrai o ID da comic do resourceURI
                       const characterId = characters.resourceURI.split("/").pop();
                       console.log(characters)
                       return (
                         <span key={index}>
-                          {/* Use o comicId para criar o Link */}
                           <Link to={`/characters/${characterId}`}>
                             {characters.name}
                           </Link>

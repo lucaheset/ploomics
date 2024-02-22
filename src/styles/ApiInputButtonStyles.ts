@@ -5,11 +5,9 @@ export const FormContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  
   background-color: #880808;
   padding: 20px;
   width: 300px;
@@ -29,14 +27,15 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
+  background-color: ${({ theme }) => theme.buttonBackground};
+  color: ${({ theme }) => theme.buttonText};
   padding: 10px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #007bff;
-  color: #fff;
   border: none;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  width: 148px;
 
   &:hover {
     background-color: #0056b3;

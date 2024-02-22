@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { ts, hashCookies, BASE_URL_CHARACTERS } from "../../Constants";
 import Cookies from "js-cookie";
-import { Card, CardList, Container, DetailedCard } from "../../styles/styles";
+import { CardList, Container, DetailedCard } from "../../styles/styles";
 import GlobalStyle from "../../styles/global";
 import Header from "../../Components/Header";
+import Loading from "../../Components/Loading";
 
-// Definição da interface Character
 interface Character {
   name: string;
   description: string;
@@ -21,7 +21,6 @@ interface Character {
 const CharacterDetail = () => {
   const { characterId } = useParams();
 
-  // Agora o estado sabe que armazenará um objeto do tipo Character ou será null
   const [characterDetail, setCharacterDetail] = useState<Character | null>(
     null
   );
@@ -50,15 +49,14 @@ const CharacterDetail = () => {
   }, [characterId]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (!characterDetail) {
     return <div>Personagem não encontrado.</div>;
   }
 
-  // Montar URL da imagem
-  const imageUrl = `${characterDetail.thumbnail.path}.${characterDetail.thumbnail.extension}`;
+ 
 
   return (
     <div>
