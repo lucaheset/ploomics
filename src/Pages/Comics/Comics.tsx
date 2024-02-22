@@ -16,6 +16,22 @@ import { useLoading } from "../../Storage/useLoading";
 import { BASE_URL_COMICS, CookiesName, hashCookies, ts } from "../../Constants";
 import Skeleton from "react-loading-skeleton";
 import Header from "../../Components/Header";
+import SearchBar from "../../Components/SearchBar";
+
+interface Comic {
+  id: number;
+  title: string;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+  characters: {
+    items: Array<{
+      name: string;
+    }>;
+  };
+}
+
 
 const Comics = () => {
   const navigate = useNavigate();
@@ -31,38 +47,66 @@ const Comics = () => {
   const setIsLoading = useLoading((state) => state.setIsLoading);
   const isLoading = useLoading((state) => state.isLoading);
 
-  const [comics, setComics] = useState<any[]>([]);
+  const [comics, setComics] = useState<Comic[]>([]);
 
-  function fetchData() {
+  const [searchValue, setSearchValue] = useState("");
+
+  const pageSize = 20; // This should be set to whatever your API uses for pagination
+
+  function fetchData(search?: string, newSearch: boolean = false) {
     if (loading) return;
+
+    // Reset states if it's a new search
+    if (newSearch) {
+      setComics([]);
+      setOffset(0);
+    }
+
     setLoading(true);
-    axios
-      .get(
-        `${BASE_URL_COMICS}?ts=${ts}&apikey=${Cookies.get(
+
+    const requestURL = search
+      ? `${BASE_URL_COMICS}?titleStartsWith=${search}&ts=${ts}&apikey=${Cookies.get(
           "UserPublicApi"
         )}&hash=${hashCookies}&offset=${offset}`
-      )
+      : `${BASE_URL_COMICS}?ts=${ts}&apikey=${Cookies.get(
+          "UserPublicApi"
+        )}&hash=${hashCookies}&offset=${offset}`;
+
+    axios
+      .get(requestURL)
       .then((response) => {
         const newData = response.data.data.results;
-        const comicIds = new Set(comics.map((comic) => comic.id));
-        const newUniqueComics = newData.filter(
-          (comic: { id: Number; }) => !comicIds.has(comic.id)
-        );
 
-        setIsAuthenticated(true);
-        setComics((prevComics) => [...prevComics, ...newUniqueComics]);
-        setHasMore(newUniqueComics.length > 0);
-        setOffset((prevOffset) => prevOffset + newUniqueComics.length);
-        setLoading(false);
-        console.log(newData)
+        const newComics = newSearch ? newData : [...comics, ...newData];
+        const uniqueComics = Array.from(
+          new Set(newComics.map((comic: Comic) => comic.id))
+        ).map((id) => {
+          return newComics.find((comic: Comic) => comic.id === id);
+        });
+
+
+          setIsAuthenticated(true);
+          setComics(uniqueComics);
+          setHasMore(newComics.length > 0);
+          setOffset((prevOffset) => prevOffset + newComics.length);
+          setLoading(false);
+          console.log(newData);
+        
       })
       .catch((error) => {
         console.log(error);
         toast.warning("Certifique-se de estar autenticado");
         navigate("/");
+      })
+      .finally(() => {
         setLoading(false);
       });
   }
+
+  const onNewSearchValue = (newValue: string) => {
+    setSearchValue(newValue);
+    fetchData(newValue, true);
+  };
 
   useEffect(() => {
     fetchData();
@@ -73,13 +117,16 @@ const Comics = () => {
   }
 
   const fetchMoreData = () => {
-    fetchData();
+    if (!loading && hasMore) {
+      fetchData(searchValue);
+    }
   };
 
   return (
     <div>
       <Toaster richColors position="bottom-right" closeButton />
       <Header />
+      <SearchBar onSearchClick={onNewSearchValue} />
       <Container>
         <GlobalStyle />
         <InfiniteScroll
@@ -95,7 +142,7 @@ const Comics = () => {
               <Card
                 key={comic.id}
                 thumbnail={comic.thumbnail}
-                onClick={() => navigate(`/Comics/${comic.id}`)}
+                onClick={() => navigate(`/comics/${comic.id}`)}
               >
                 <div id="img" />
                 <h2>{comic.title || <Skeleton width={30} />}</h2>
