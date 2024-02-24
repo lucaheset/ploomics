@@ -1,15 +1,33 @@
 import styled from "styled-components";
 
 export const Sidebar = styled.div`
-  position: fixed; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
   left: 0;
   top: 0;
-  background-color: #800020;
-  width: 10%;
-  height: 100vh; 
+  background-color: #fcfcfc;
+  width: 12%;
+  height: 100vh;
   padding-top: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  h1 {
+    font-size: 135%;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    span {
+      color: red;
+      font-family: "Poppins", sans-serif;
+      font-weight: bold;
+      font-style: normal;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 30%;
+  }
 `;
 
 export const SidebarInput = styled.input`
@@ -20,10 +38,11 @@ export const SidebarInput = styled.input`
   text-align: center;
   border-radius: 4px;
   border: none;
-  background-color: #DCDCDC;
+  background-color: #dcdcdc;
   color: #333;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-  margin-top: 75%;
+  width: 80%;
+  max-width: 200px;
 `;
 
 export const SideBarButton = styled.button`
@@ -32,14 +51,15 @@ export const SideBarButton = styled.button`
   padding: 10px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #007bff;
+  background-color: #800020;
   color: #fff;
   border: none;
   border-radius: 4px;
   transition: background-color 0.3s ease;
-  width: 148px;
+  width: 80%;
+  max-width: 200px;
 
   &:hover {
-    background-color: #0056b3;
+    opacity: 70%;
   }
 `;

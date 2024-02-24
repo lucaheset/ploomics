@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import GlobalStyle from "../../styles/global";
 import axios from "axios";
 import { toast } from "sonner";
-import { BASE_URL_CHARACTERS, hashCookies, ts } from "../../Constants";
-import Cookies from "js-cookie";
+import { BASE_URL_CHARACTERS, getAuthQueryString } from "../../Constants";
 import { Container, CardList, Card } from "../../styles/styles";
 import Header from "../../Components/Header";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -34,17 +33,13 @@ const Characters = () => {
     }
 
     const requestURL = search
-      ? `${BASE_URL_CHARACTERS}?nameStartsWith=${search}&ts=${ts}&apikey=${Cookies.get(
-          "UserPublicApi"
-        )}&hash=${hashCookies}&offset=${offset}`
-      : `${BASE_URL_CHARACTERS}?ts=${ts}&apikey=${Cookies.get(
-          "UserPublicApi"
-        )}&hash=${hashCookies}&offset=${offset}`;
-    console.log("URL:", requestURL);
+    ? `${BASE_URL_CHARACTERS}?nameStartsWith=${search}&${getAuthQueryString()}&offset=${offset}`
+    : `${BASE_URL_CHARACTERS}?${getAuthQueryString()}&offset=${offset}`;
 
     axios
       .get(requestURL)
       .then((response) => {
+        newSearch = false
         setLoading(false);
         const newData = response.data.data.results;
         if (newSearch || (offset === 0 && characters.length === 0)) {
@@ -66,7 +61,7 @@ const Characters = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         toast.warning("Certifique-se de estar autenticado");
         navigate("/");
       })

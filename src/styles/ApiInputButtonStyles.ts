@@ -27,8 +27,7 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  background-color: ${({ theme }) => theme.buttonBackground};
-  color: ${({ theme }) => theme.buttonText};
+
   padding: 10px;
   font-size: 16px;
   cursor: pointer;
@@ -38,6 +37,6 @@ export const Button = styled.button`
   width: 148px;
 
   &:hover {
-    background-color: #0056b3;
+    opacity: 70%
   }
 `;

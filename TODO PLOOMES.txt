@@ -1,4 +1,4 @@
-Tela de autenticação:
+        Tela de autenticação:
 
         A tela inicial da aplicação deve possibilitar que o usuário adicione manualmente
         as keys de autenticação para uso da API (public key e private key);
@@ -13,7 +13,7 @@ Tela de autenticação:
         de sua autenticação;
 
 
-Telas de listagem:
+        Telas de listagem:
 
         Deve haver 3 telas de listagem de itens, sendo, personagens, quadrinhos e
         criadores;
@@ -22,7 +22,7 @@ Telas de listagem:
 
 
 Funcionalidades satisfatórias (Dr Estranho)
-Tela do item:
+        Tela do item:
 
         Deve ser possível clicar nos itens listados (personagens, quadrinhos e
         criadores) e abrir uma tela contendo seus detalhes;
@@ -42,22 +42,23 @@ feita deve ser mantida
 
 
 
-Funcionalidades desejáveis (Thor)
-Filtros por opções:
+        Funcionalidades desejáveis (Thor)
+        Filtros por opções:
 
-Possibilitar filtros mais detalhados nas listagens, como:
-Filtro por criador;
+        Possibilitar filtros mais detalhados nas listagens, como:
+        Filtro por criador;
 
-Filtro por personagens;
+        Filtro por personagens;
 
-Deve ser possível pesquisar a opção de filtragem (criador, personagens) pelo
-nome dentro do filtro;
+        Deve ser possível pesquisar a opção de filtragem (criador, personagens) pelo
+        nome dentro do filtro;
+
 
 Filtros por data de lançamento:
 
-Possibilitar filtros por data nas listagens:
+	Possibilitar filtros por data nas listagens:
 
-Filtro por data fixa de lançamento;
+	Filtro por data fixa de lançamento;
 
 Filtro por intervalo de data de lançamento;
 
@@ -85,16 +86,16 @@ dos mesmos;
 
 Links entre as entidades:
 
-Ao final de todas as entidades exibir os itens relacionados, como personagens,
-quadrinhos, criadores, etc;
+	Ao final de todas as entidades exibir os itens relacionados, como personagens,
+	quadrinhos, criadores, etc;
 
         Também deve ser possível clicar no item relacionado e abrir a tela de descrição
         desse item;
 
 Tela de itens favoritos:
 
-Possibilidade de favoritar itens e salvá-los nos cookies, tendo uma tela onde
-seja possível ao usuário visualizar todos os seus itens favoritados;
+	Possibilidade de favoritar itens e salvá-los nos cookies, tendo uma tela onde
+	seja possível ao usuário visualizar todos os seus itens favoritados;
 
 Criar categorias que possibilitem ao usuário organizar seus itens favoritos em
 “caxininha” com nome;
@@ -146,3 +147,27 @@ PUXAR ID DA URL
 DISPLAY COMIC
 
 linha do tempo sort
+
+filtro por criador e por personagens
+
+input que recebe o nome do criador/personagem
+
+fetch url creators startwith / comics
+
+fetch url characters startwith / comics
+
+dropdown que tem debounce pra dar fetch
+
+pegar id do criador/characters
+
+id/comics
+
+
+
+filtros
+
+Filtro por data fixa de lançamento;  startYear
+
+Filtro por intervalo de data de lançamento;
+
+Filtro por data relativa de lançamento;

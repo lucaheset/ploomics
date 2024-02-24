@@ -1,10 +1,9 @@
-import { createGlobalStyle } from "styled-components";
-import img from "../img/erik-mclean-8SeJUmfahu0-unsplash.jpg";
-
-
+import { createGlobalStyle } from "styled-components";;
 
 
 const GlobalStyle = createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap');
+
 
     * {
         margin: 0;
@@ -16,7 +15,13 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        background-image: url(${img});
+
+      @media only screen and (min-width: 1024px) {
+  .container header .header-nav-area #nav_container  {
+    display:flex;
+   }
+  }
+        background-image: url('/img/background.jpg');
         background-size: 90%;
         background-color: #f0f2f5;
         background-position-x: center;

@@ -46,11 +46,10 @@ const CreatorDetails = () => {
         const creatorData = response.data.data.results[0];
         setCreatorDetail(creatorData);
         setLoading(false);
-        console.log(creatorData);
 
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         toast.warning("Make sure you are authenticated to access this page");
         setLoading(false);
       });
@@ -68,7 +67,9 @@ const CreatorDetails = () => {
         ) : creatorDetail ? (
           <CardList>
             <DetailedCard thumbnail={creatorDetail.thumbnail}>
-              <div id="img" />
+            <img
+              src={`${creatorDetail.thumbnail.path}.${creatorDetail.thumbnail.extension}`}
+              />
               <h2>{creatorDetail.fullName}</h2>
               <p>
                 Comics:

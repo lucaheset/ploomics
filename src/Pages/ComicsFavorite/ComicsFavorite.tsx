@@ -14,7 +14,7 @@ import SideBar from "../../Components/SideBar";
 import { Comic } from "../../Constants/types";
 import Cookies from "js-cookie";
 
-const Comics = () => {
+const ComicsFavorite = () => {
   const navigate = useNavigate();
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -47,8 +47,7 @@ const Comics = () => {
       : `${BASE_URL_COMICS}?${getAuthQueryString()}&offset=${offset}`;
 
     if (filterYear) {
-      requestURL = `${BASE_URL_COMICS}?startYear=${filterYear}&${getAuthQueryString()}&offset=${offset}&limit=100`;
-      
+      requestURL = `${BASE_URL_COMICS}?startYear=${filterYear}&${getAuthQueryString()}`;
     }
     axios
       .get(requestURL)
@@ -57,26 +56,40 @@ const Comics = () => {
         setLoading(false);
         const newData = response.data.data.results;
 
+        let favoriteList: string[] = JSON.parse(
+          Cookies.get("FavoriteList") || "[]"
+        );
+
         if (newSearch || (offset === 0 && comics.length === 0)) {
-          setComics(newData);
+          setComics(
+            newData.filter((comic: Comic) =>
+              favoriteList.includes(String(comic.id))
+            )
+          );
         } else {
           setComics((prevComics) => {
-            const filteredData = newData.filter(
-              (newComic: { id: number }) =>
-                !prevComics.some((prevComic) => prevComic.id === newComic.id)
-            );
+            const filteredData = newData
+              .filter(
+                (newComic: { id: number }) =>
+                  !prevComics.some((prevComic) => prevComic.id === newComic.id)
+              )
+              .filter((comic: Comic) =>
+                favoriteList.includes(String(comic.id))
+              );
             return [...prevComics, ...filteredData];
           });
         }
-        setHasMore(newData.length > 0);
 
+        setHasMore(newData.length > 0);
         if (!newSearch || !search) {
           setQtd((prevOffset) => prevOffset + 19);
         }
       })
       .catch((error) => {
+        console.error(error);
         toast.warning("Certifique-se de estar autenticado");
         navigate("/");
+       
       })
       .finally(() => {
         setLoading(false);
@@ -85,7 +98,6 @@ const Comics = () => {
 
   const onNewSearchValue = (newValue: string) => {
     setSearchValue(newValue);
-    console.log(searchValue)
     fetchData(newValue, true);
   };
 
@@ -100,33 +112,35 @@ const Comics = () => {
   const fetchMoreData = () => {
     if (!loading && hasMore) {
       fetchData(searchValue, false, qtd);
-      console.log(searchValue)
-
     }
   };
 
   const handleComicsFetched = (newComics: Comic[], year?: number): void => {
-    setQtd(0);
     setComics([]);
     setComics(newComics);
     setHasMore(newComics.length > 0);
-    
+    setQtd(0);
     if (year) setFilterYear(year);
   };
   const t = 16;
   const threshold = (qtd - t) / qtd;
 
   function handleFavoriteItem(id: number) {
-    let favoriteList: string[] = JSON.parse(Cookies.get('FavoriteList') || '[]');
-    
+    let favoriteList: string[] = JSON.parse(
+      Cookies.get("FavoriteList") || "[]"
+    );
+
     if (favoriteList.includes(String(id))) {
-        return;
+      const index = favoriteList.indexOf(String(id));
+      if (index !== -1) {
+        favoriteList.splice(index, 1);
+      }
+      const newFavoriteList = JSON.stringify(favoriteList);
+      Cookies.set("FavoriteList", newFavoriteList, { expires: 7, path: "" });
     } else {
-        favoriteList.push(String(id));
-        const newFavoriteList = JSON.stringify(favoriteList);
-        Cookies.set('FavoriteList', newFavoriteList, { expires: 7, path: '' });
+      return;
     }
-}
+  }
 
   return (
     <div>
@@ -151,9 +165,7 @@ const Comics = () => {
             {comics.map((comic) => (
               <Card key={comic.id} thumbnail={comic?.thumbnail}>
                 <FavoriteButton onClick={() => handleFavoriteItem(comic.id)} />
-                <div
-                onClick={() => navigate(`/comics/${comic.id}`)}
-                >
+                <div onClick={() => navigate(`/comics/${comic.id}`)}>
                   <div id="img" />
                   <h2>{comic.title || <Skeleton width={30} />}</h2>
                   <p>
@@ -181,4 +193,4 @@ const Comics = () => {
   );
 };
 
-export default Comics;
+export default ComicsFavorite;

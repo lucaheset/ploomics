@@ -64,7 +64,9 @@ const CharacterDetail = () => {
       <Container>
         <CardList>
           <DetailedCard thumbnail={characterDetail.thumbnail}>
-            <div id="img" /> =
+           <img
+              src={`${characterDetail.thumbnail.path}.${characterDetail.thumbnail.extension}`}
+              />
             <h2>{characterDetail.name}</h2>
             <p>{characterDetail.description || "No description available."}</p>
           </DetailedCard>

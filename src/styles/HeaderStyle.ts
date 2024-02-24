@@ -8,7 +8,7 @@ export const Headers = styled.div`
   gap: 3rem;
   align-items: center;
   justify-content: center;
-  background-color: #800020;
+  background-color: #fcfcfc;
   width: 1200px;
   border: none;
   border-radius: 5px;
@@ -22,20 +22,20 @@ export const Headers = styled.div`
   }
   .link-style {
     display: flex;
-    background-color: #ffffff;
     width: 100px;
     height: 35px;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-    box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.3);
+
     text-decoration: none;
     color: #000000;
     font-size: 14px;
     transition: background-color 0.3s ease;
     
     &:hover {
-      background-color: #633;
+      background-color: #800020;
+      color: #fcfcfc;
     }
   }
 

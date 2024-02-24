@@ -1,15 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { Headers } from "../styles/HeaderStyle";
-import ToggleButton from "./ToggleButton";
 
 export default function Header() {
   const location = useLocation();
 
   return (
     <div>
-      
       <Headers>
-      <h1>PlooMics</h1>
         {location.pathname !== "/home" && (
           <Link to={"/home"} className="link-style">
             <h2>Home</h2>
@@ -34,12 +31,17 @@ export default function Header() {
           </Link>
         )}
 
+        {location.pathname !== "/ComicsFavorite" && (
+          <Link to={"/ComicsFavorite"} className="link-style">
+            <h2>Favorite</h2>
+          </Link>
+        )}
+
         {location.pathname !== "/logout" && (
           <Link to={"/logout"} className="link-style">
             <h2>Log Out</h2>
           </Link>
         )}
-        <ToggleButton />
       </Headers>
     </div>
   );

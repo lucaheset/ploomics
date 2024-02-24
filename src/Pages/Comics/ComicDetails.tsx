@@ -46,7 +46,7 @@ const ComicDetail = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         toast.warning("Make sure you are authenticated to access this page");
         setLoading(false);
       });
@@ -62,15 +62,16 @@ const ComicDetail = () => {
         ) : comicDetail ? (
           <CardList>
             <DetailedCard thumbnail={comicDetail.thumbnail}>
-              <div id="img" /> 
+              <img
+              src={`${comicDetail.thumbnail.path}.${comicDetail.thumbnail.extension}`}
+              />
               <h2>{comicDetail.title}</h2>
               
               <p>
-                Characters
+                Characters: 
                 {comicDetail.characters.items.length > 0
                   ? comicDetail.characters.items.map((characters, index) => {
                       const characterId = characters.resourceURI.split("/").pop();
-                      console.log(characters)
                       return (
                         <span key={index}>
                           <Link to={`/characters/${characterId}`}>

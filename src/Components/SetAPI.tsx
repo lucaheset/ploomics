@@ -38,7 +38,7 @@ const SetAPI = () => {
       })
       .catch((error) => {
 
-        console.log(error);
+        console.error(error);
         toast.warning("Certifique-se de colocar suas credenciais.");
       });
   }
