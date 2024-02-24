@@ -85,7 +85,6 @@ const Comics = () => {
 
   const onNewSearchValue = (newValue: string) => {
     setSearchValue(newValue);
-    console.log(searchValue)
     fetchData(newValue, true);
   };
 
@@ -100,7 +99,6 @@ const Comics = () => {
   const fetchMoreData = () => {
     if (!loading && hasMore) {
       fetchData(searchValue, false, qtd);
-      console.log(searchValue)
 
     }
   };
