@@ -1,57 +1,66 @@
-# PLOOMICS
-## Conteúdo:
+📂 PLOOMICS
 
-- [Introdução](#getting_started)
-- [Configurações e Utilidades](#config)
-- [Desenvolvimento e Design](#usage)
-- [Funcionalidades](#features)
+📖 Table of Contents
 
-## Introdução <a name = "about"></a>
+Introduction
 
-Este documento serve como uma visão geral e documentação para a aplicação desenvolvida para interagir com a API da Marvel, focada na apresentação de quadrinhos, personagens e criadores. A interface gráfica foi desenvolvida por mim, com o objetivo de proporcionar uma experiência de usuário intuitiva e envolvente, utilizando React e TypeScript.
+Configuration and Utilities
 
-## Configurações e Utilitários<a name = "config"></a>
+Development and Design
 
-Componentes Principais
+Features
 
-App.tsx: O componente raiz da aplicação, configurando o roteamento e a estrutura global.
+📘 Introduction 
 
-main.tsx: O ponto de entrada da aplicação, responsável por renderizar o App.
+This document provides an overview and documentation for the application developed to interact with the Marvel API, focusing on presenting comics, characters, and creators. The graphical interface was developed to deliver an intuitive and engaging user experience using React and TypeScript.
 
+⚙️ Configuration and Utilities 
 
-Utilitários e Configurações
+Main Components
 
-SetAPI.tsx: Configurações para conexão com a API externa da Marvel.
-types.ts: Definições de tipos TypeScript para padronizar os dados manipulados.
-useAuth.ts e useLoading.ts: Hooks personalizados para autenticação e gerenciamento do estado de carregamento.
+App.tsx: The root component of the application, setting up routing and the global structure.
 
+main.tsx: The application's entry point, responsible for rendering the App.
 
-## Desenvolvimento e Design <a name = "usage"></a>
+Utilities and Configurations
 
-A aplicação utiliza React e TypeScript, com uma abordagem de design que prioriza a usabilidade e a estética visual. O uso de styled-components permite a criação de componentes estilizados que contribuem para uma interface coesa e atraente.
+SetAPI.tsx: Configuration for connecting to the external Marvel API.
 
-Estilos
-Arquivos como ApiInputButtonStyles.ts, FilterStyle.ts, HeaderStyle.ts, entre outros, definem os estilos específicos para componentes chave da aplicação, garantindo uma experiência visual consistente.
+types.ts: TypeScript type definitions to standardize handled data.
 
-#Funcionalidades <a name = "features"></a>
+useAuth.ts and useLoading.ts: Custom hooks for authentication and loading state management.
 
-A aplicação oferece diversas funcionalidades, projetadas para melhorar a experiência do usuário ao explorar conteúdos da Marvel:
+🎨 Development and Design 
 
-Dentre elas estão:
+The application uses React and TypeScript with a design approach that prioritizes usability and visual aesthetics. The use of styled-components enables the creation of styled components that contribute to a cohesive and attractive interface.
 
-Tela de Autenticação: Possibilita ao usuário adicionar manualmente as chaves de autenticação (public key e private key) para uso da API. As chaves inseridas são persistidas nos cookies do navegador.
+Styling
 
-Telas de Listagem: Existem 3 telas para listagem de itens: personagens, quadrinhos e criadores, todas com scroll infinito ou paginação.
+Files such as ApiInputButtonStyles.ts, FilterStyle.ts, HeaderStyle.ts, among others, define specific styles for key application components, ensuring a consistent visual experience.
 
-Navegação e Filtragem: Possibilidade de navegar facilmente pela lista de personagens, quadrinhos e criadores, com filtros para refinar as buscas.
+🚀 Features 
 
-Tela do Item: Permite clicar nos itens listados e abrir uma tela contendo seus detalhes.
+The application offers several features designed to enhance the user experience while exploring Marvel content:
 
-Filtros por Opções e Data de Lançamento: Inclui filtros detalhados nas listagens, como por criador e personagens, e filtros por data de lançamento.
+Authentication Screen: Allows users to manually add authentication keys (public and private) for API usage. Keys are persisted in browser cookies.
 
-Links entre Entidades: Apresenta itens relacionados ao final de cada entidade, com a possibilidade de visualizar a descrição desses itens clicando neles.
+Listing Screens: Includes three listing screens for characters, comics, and creators, all featuring infinite scrolling or pagination.
 
-Tela de Itens Favoritos: Possibilita favoritar itens e visualizá-los em uma tela dedicada, com a opção de organizar em categorias personalizadas.
+Navigation and Filtering: Easily navigate the lists of characters, comics, and creators with filters to refine searches.
 
-Detalhes e Favoritos: Visualização de detalhes específicos sobre cada item e adição de quadrinhos aos favoritos para acesso rápido.
-Autenticação e Segurança: Sistema de autenticação robusto para uma experiência segura e personalizada.
+Item Detail Screen: Click on listed items to view detailed information about them.
+
+Filters by Options and Release Date: Detailed filters in listings, such as filtering by creator, character, and release date.
+
+Linked Entities: Displays related items at the end of each entity, allowing users to view descriptions by clicking on them.
+
+Favorites Screen: Favorite items and view them in a dedicated screen, with the option to organize them into custom categories.
+
+Details and Favorites: View specific details about each item and add comics to favorites for quick access.
+
+Authentication and Security: Robust authentication system for a secure and personalized experience.
+
+✨ Author
+
+Developed by Luca Heset 🚀
+
